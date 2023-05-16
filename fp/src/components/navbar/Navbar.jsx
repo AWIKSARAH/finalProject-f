@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, {  useState } from "react";
 import { RiMenu3Line, RiCloseLine } from "react-icons/ri";
 import logo from "../../logo.svg";
 import "./navbar.css";
@@ -26,7 +26,7 @@ const Navbar = () => {
               onClick={() => handleLinkClick(1)}
             >
               {" "}
-              <a>Home</a>
+              <>Home</>
             </Link>
           </p>
           <p>
@@ -36,12 +36,12 @@ const Navbar = () => {
               onClick={() => handleLinkClick(2)}
             >
               {" "}
-              <a>About us?</a>
+              <>About us?</>
             </Link>
           </p>
           <p>
             <Link
-              to={"/find"}
+              to={"/find/people"}
               className={activeLink === 3 ? "active" : ""}
               onClick={() => handleLinkClick(3)}
             >
@@ -92,7 +92,7 @@ const Navbar = () => {
             <div className="gpt3__navbar-menu_container-links">
               <p>
                 <Link to={"/"} onClick={() => handleLinkClick(1)}>
-                  <a>Home</a>
+                  <>Home</>
                 </Link>
               </p>
               <p>
@@ -101,16 +101,16 @@ const Navbar = () => {
                   className={activeLink === 2 ? "active" : ""}
                   onClick={() => handleLinkClick(2)}
                 >
-                  <a>About us?</a>
+                  <>About us?</>
                 </Link>
               </p>
               <p>
                 <Link
-                  to={"/find"}
+                  to={"/find/people"}
                   className={activeLink === 3 ? "active" : ""}
                   onClick={() => handleLinkClick(3)}
                 >
-                  <a>Find People</a>
+                  <>Find People</>
                 </Link>
               </p>
 

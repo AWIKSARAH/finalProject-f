@@ -1,6 +1,6 @@
 import React from "react";
 import "./style.css";
-import logo from '../../../assets/ai.png'
+import logo from '../../../assets/1.jpeg';
 const Card = ({ name }) => (
   <div
     className="card card0"
