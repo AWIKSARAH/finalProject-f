@@ -1,4 +1,4 @@
-import React, { useState, useEffect ,useRef} from "react";
+import React, { useState, useEffect, useRef } from "react";
 import axios from "axios";
 import { useParams } from "react-router-dom";
 import Card from "@mui/material/Card";
@@ -28,7 +28,20 @@ const StyledCard = styled(Card)({
   borderRadius: "4px",
   marginBottom: "16px",
   display: "flex",
-  // marginRight:`80px`
+  marginRight: "10%",
+  marginLeft: "10%",
+
+  // Media query for iPad screens
+  "@media (max-width: 1024px)": {
+    flexDirection: "column",
+    alignItems: "center",
+  },
+
+  // Media query for phone screens
+  "@media (max-width: 480px)": {
+    flexDirection: "column",
+    alignItems: "center",
+  },
 });
 
 const theme = createTheme({
@@ -91,6 +104,7 @@ const ReactionWrapper = styled.div`
   margin-top: 16px;
   border-top: 1px solid #8080805e;
   padding: 10px 5px;
+  overflow: scroll;
 `;
 
 const ReactionTitle = styled(Typography)({
@@ -106,21 +120,21 @@ const ColorCircle = styled("div")(({ color }) => ({
 }));
 const ReactionItem = styled(Typography)(({ theme }) => ({
   marginTop: theme.spacing(1),
-  borderBottom: "1.5px solid #80808040"
-
+  borderBottom: "1.5px solid #80808040",
 }));
 
 const DataCard = () => {
-
   const [data, setData] = useState([]);
+  const [disaster, setId] = useState([]);
   const { id } = useParams();
   const ref = useRef(null);
-console.log(id);
+  console.log(id);
   useEffect(() => {
     const fetchData = async () => {
       try {
         const response = await axios.get(`http://localhost:5000/api/a/${id}`);
         setData(response.data.data);
+        setId(response.data.data.idDisaster);
         console.log(response);
       } catch (error) {
         console.error(error);
@@ -135,7 +149,7 @@ console.log(id);
   // }
   const { idDisaster } = data;
 
-  const mapRef = useRef(null); // Reference to the map container element
+  const mapRef = useRef({}); // Reference to the map container element
 
   useEffect(() => {
     if (mapRef.current) {
@@ -152,7 +166,7 @@ console.log(id);
         }),
       });
 
-      if (idDisaster) {
+      if (disaster) {
         const markerFeature = new Feature({
           geometry: new Point(fromLonLat(generateMapPosition())),
         });
@@ -183,12 +197,12 @@ console.log(id);
         map.addLayer(vectorLayer);
       }
     }
-  }, [idDisaster]);
+  }, [disaster]);
 
   const generateMapPosition = () => {
-    if (idDisaster) {
-      const { latitude, longitude } = idDisaster;
-      return [longitude, latitude]; // OpenLayers uses [longitude, latitude] format
+    if (disaster && disaster.length > 0) {
+      const { latitude, longitude } = disaster[0]; // Access the first element
+      return [latitude, longitude];
     }
 
     return [0, 0];
@@ -197,11 +211,11 @@ console.log(id);
   return (
     <ThemeProvider theme={theme}>
       <StyledCard>
-      <div style={{ width: "50%"}}>
-  <img src={ai} alt="Image" />
-  <button style={{width:'100%'}}>did</button>
-</div>
-        <CardContent>
+        <div style={{ width: "50%", marginRight: "10%" }}>
+          <img src={ai} alt="Image" style={{ width: "100%" }} />
+          <button style={{ width: "100%" }}>did</button>
+        </div>
+        <CardContent style={{ width: "50%" }}>
           <Title variant="h5">{data.title}</Title>
           <Description variant="body1">{data.description}</Description>
           <Contact variant="body2">Contact: {data.tel}</Contact>
@@ -302,14 +316,20 @@ console.log(id);
               <ReactionTitle variant="h6">Reactions:</ReactionTitle>
               {data.reactionId.map((reaction) => (
                 <ReactionItem key={reaction._id}>
-                  {reaction.comment}
+                  <p style={{ fontWeight: "bold", display: "inline" }}>
+                    {reaction.name ? reaction.name : "Anonymos"}
+                  </p>
+                  : {reaction.comment}
                 </ReactionItem>
               ))}
             </ReactionWrapper>
           )}
         </CardContent>
       </StyledCard>
-        <div ref={mapRef} style={{width:"100%", height: "300px", overflow: "hidden" }}></div>
+      <div
+        ref={mapRef}
+        style={{ width: "100%", height: "300px", overflow: "hidden" }}
+      ></div>
     </ThemeProvider>
   );
 };
