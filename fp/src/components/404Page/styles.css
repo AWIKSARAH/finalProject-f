@@ -37,9 +37,13 @@ a {
   vertical-align: baseline;
   background: transparent;
   text-decoration: none;
-  color: #000;
+  color: var(--color-text);
 }
 
+a:hover {
+
+  color: var( --color-subtext);
+}
 input, select, button, textarea {
   margin: 0;
   font-size: 100%;

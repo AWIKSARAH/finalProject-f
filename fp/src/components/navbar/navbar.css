@@ -49,6 +49,7 @@
 .gpt3__navbar-links_container > p > a.active {
     border-bottom: 2px solid var(--color-blog);
     border-radius: 1px;
+    color: var(--color-subtext);
   }
   
 .gpt3__navbar-sign button,
@@ -82,7 +83,6 @@
     justify-content: flex-end;
     align-items: flex-end;
     flex-direction: column;
-    
     text-align: end;
     background: var(--color-footer);
     padding: 2rem;

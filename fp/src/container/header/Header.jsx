@@ -15,10 +15,11 @@ const Header = () => (
         in the search and rescue efforts during and after disasters. Join us in
         our mission to reunite families and save lives.
       </p>
-
       <div className="gpt3__header-content__input">
-        <button type="button">Get Started</button>
+        <input type="email" placeholder="Search ...." />
+        <button type="button">Search</button>
       </div>
+
     </div>
 
     <div className="gpt3__header-image">

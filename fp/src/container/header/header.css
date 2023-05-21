@@ -16,8 +16,9 @@
 button:hover {
     background: var(--color-subtext);
     border: 0;
-    animation: animStar 150s linear infinite;
 }
+
+
   
 .axente__gpt3{
     /* color: white!important; */
@@ -42,7 +43,7 @@ button:hover {
 }
 
 .gpt3__header-content__input {
-    width: 50%;
+    width: 100%;
     margin: 2rem 0 1rem;
 
     display: flex;
@@ -57,11 +58,10 @@ button:hover {
     font-weight: 400;
     font-size: 20px;
     line-height: 28px;
-    background: var(--color-footer);
-    border: 2px solid var(--color-footer);
+    background: #FFf;
     padding: 0 1rem;
     outline: none;
-    color: #fff;
+    color: var(--color-blog);
 
     border-top-left-radius: 5px;
     border-bottom-left-radius: 5px;
@@ -76,7 +76,6 @@ button:hover {
     font-size: 20px;
     line-height: 28px;
     background: var( --color-blog);
-    border: 2px solid var( --color-blog);
     padding: 0 1rem;
     color: #fff;
     cursor: pointer;
@@ -160,5 +159,7 @@ button:hover {
     .gpt3__header-content__input button {
         font-size: 12px;
         line-height: 16px;
+        border: none;
     }
 }
+
