@@ -14,7 +14,6 @@
   --color-check-disabled: #959495;
 }
 
-
 .holygrail-body {
   display: flex;
   flex: 1;
@@ -42,7 +41,7 @@ a.blue-link {
 hr {
   border: 1px solid var(--color-text1);
 }
-.post-items-container{
+.post-items-container {
   width: 50%;
 }
 .btn-primary,
@@ -304,9 +303,12 @@ ul.main-nav .dd .dropdown-menu {
 
 .section-main {
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
   padding-left: 1.875em;
   padding-right: 1.875em;
+  gap: 10%;
+  align-items: flex-start;
+  flex-direction: row-reverse;
 }
 .section-main .left-content,
 .section-main .middle-content,
@@ -314,9 +316,11 @@ ul.main-nav .dd .dropdown-menu {
   width: 100%;
 }
 .section-main .middle-content {
-  max-width: 80%;
-  margin-left: 1em;
-  margin-right: 1em;
+  max-width: 100%;
+  margin-left: 6em;
+  margin-right: 6em;
+  display: flex;
+  gap: 6em;
 }
 .section-main aside.left-content,
 .section-main aside.right-content {
@@ -331,29 +335,28 @@ ul.main-nav .dd .dropdown-menu {
 }
 
 .post-container {
-  background: #FFFFFF;
+  background: #ffffff;
   width: 100%;
   border-radius: 1em;
   padding: 1em 0;
-  /* border: 8px solid #ffffff38; */
+  border: 8px solid #2a1b1b0f;
   margin-bottom: 10em;
   display: flex;
-  border-radius: 1%;
+  border-radius: 4%;
   flex-direction: column;
-
 }
 
-.post-content-container{
+.post-content-container {
   margin-left: 1.5em;
   display: flex;
-  box-shadow: -1px -1px 5px 5px #ffffff7a;
+  box-shadow: -1px -1px 5px 5px #413c3c1c;
   margin-right: 1.5em;
+  border-radius: 10px;
 }
-
 
 .post-image-container {
   text-align: center;
-  width:50%
+  width: 50%;
 }
 
 .post-image {
@@ -459,7 +462,8 @@ ul.main-nav .dd .dropdown-menu {
   background-clip: padding-box;
   background-color: rgba(255, 255, 255, 0.2);
   -webkit-border-radius: 7px;
-  -webkit-box-shadow: inset -1px -1px 0px rgba(0, 0, 0, 0.05), inset 1px 1px 0px rgba(0, 0, 0, 0.05);
+  -webkit-box-shadow: inset -1px -1px 0px rgba(0, 0, 0, 0.05),
+    inset 1px 1px 0px rgba(0, 0, 0, 0.05);
 }
 .comments-container::-webkit-scrollbar-button {
   display: none;
@@ -500,6 +504,7 @@ ul.main-nav .dd .dropdown-menu {
   height: 55px;
   font-size: 0.875em;
   box-shadow: none;
+  color: #28343e;
 }
 .new-comment-form textarea:focus {
   outline: none;
@@ -622,7 +627,7 @@ h5.sub {
   cursor: not-allowed;
 }
 
-input[type=checkbox] {
+input[type="checkbox"] {
   /* Add if not using autoprefixer */
   -webkit-appearance: none;
   /* Remove most all native input styles */
@@ -642,7 +647,7 @@ input[type=checkbox] {
   place-content: center;
 }
 
-input[type=checkbox]::before {
+input[type="checkbox"]::before {
   content: "";
   width: 0.65em;
   height: 0.65em;
@@ -655,11 +660,11 @@ input[type=checkbox]::before {
   background-color: CanvasText;
 }
 
-input[type=checkbox]:checked::before {
+input[type="checkbox"]:checked::before {
   transform: scale(1);
 }
 
-input[type=checkbox]:disabled {
+input[type="checkbox"]:disabled {
   --color-check: var(--color-check-disabled);
   color: var(--color-check-disabled);
   cursor: not-allowed;
@@ -813,7 +818,8 @@ footer {
   background-clip: padding-box;
   background-color: rgba(0, 0, 0, 0.2);
   -webkit-border-radius: 7px;
-  -webkit-box-shadow: inset -1px -1px 0px rgba(0, 0, 0, 0.05), inset 1px 1px 0px rgba(0, 0, 0, 0.05);
+  -webkit-box-shadow: inset -1px -1px 0px rgba(0, 0, 0, 0.05),
+    inset 1px 1px 0px rgba(0, 0, 0, 0.05);
 }
 
 ::-webkit-scrollbar-button {
@@ -826,3 +832,47 @@ footer {
   background-color: transparent;
 }
 
+
+@media only screen and (max-width: 799px) {
+  .section-main .middle-content {
+    width: 100%;
+
+    display: flex;
+    /* gap: 6em; */
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.holygrail-body {
+  display: flex;
+  flex: 1 1;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.post-items-container {
+  width: 100%;
+}
+.post-content-container {
+  margin-left: 1.5em;
+  display: flex;
+  box-shadow: -1px -1px 5px 5px #413c3c1c;
+  margin-right: 1.5em;
+  border-radius: 10px;
+  flex-direction: column;
+  align-items: center;
+}
+.post-image-container {
+  text-align: center;
+  width: 100%;
+}
+.post-author-info {
+  flex: 1 1;
+  padding-left: 0.66em;
+  font-size: 12px;
+}
+.post-ellipsis{
+  font-size: 10px;
+}
+}

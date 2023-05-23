@@ -5,7 +5,15 @@ import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
 import styled from "@emotion/styled";
-import ai from "../assets/pexels-photo-4262424.jpeg";
+import ai from "../../assets/pexels-photo-4262424.jpeg";
+
+
+
+
+
+
+
+
 
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import "ol/ol.css"; // Import OpenLayers CSS
@@ -23,7 +31,7 @@ import PaletteIcon from "@mui/icons-material/Palette";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import LocalLaundryServiceIcon from "@mui/icons-material/LocalLaundryService";
 const StyledCard = styled(Card)({
-  backgroundColor: "#DFF1E8",
+  backgroundColor: "#f0ecec",
   boxShadow: "0px 2px 4px rgba(0, 0, 0, 0.1)",
   borderRadius: "4px",
   marginBottom: "16px",
@@ -128,6 +136,13 @@ const DataCard = () => {
   const [disaster, setId] = useState([]);
   const { id } = useParams();
   const ref = useRef(null);
+  const [mode, setMode] = useState("default"); // Add a state variable for the mode
+
+  // ...
+
+  const handleModeChange = (newMode) => {
+    setMode(newMode);
+  };
   console.log(id);
   useEffect(() => {
     const fetchData = async () => {

@@ -9,7 +9,8 @@ import Contact from "../contactus";
 import About from "../about";
 import NotFound from "../404Page/NotFound";
 import People from "../people";
-import SingleAnnouncemnet from "../announcmentPage";
+import SingleAnnouncemnet from "../announcment/announcmentPage";
+import E from "../embeded"
 function App() {
   return (
     <Routes>
@@ -19,8 +20,8 @@ function App() {
         <Route path="/find" element={<Find />}>
           <Route path="/find/people" element={<People />} />
         </Route>
-        <Route path="/announcement" element={<Announcement />} />
-        <Route path="/feed" element={<News />} />
+        <Route path="/announcement" element={<News />} />
+        <Route path="/feed" element={<E />} />
         <Route path="/a/:id" element={<SingleAnnouncemnet />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="*" element={<NotFound />} /> {/* Add the 404 route */}{" "}

@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
 import "./style.css";
 import axios from "axios";
-import Feed from './feed';
+import Feed from "./feed";
 
 function ListingFeed() {
   const [data, setData] = useState([]);
@@ -39,16 +38,19 @@ function ListingFeed() {
       <main className="holygrail-body">
         <section className="holygrail-content section-main">
           <div className="middle-content">
-            {data && data.data && data.data.map((item) => (
-              <Link key={item._id} to={`/a/${item._id}`}>
-                <Feed
-                  data={item}
-                  id={item._id}
-                  totalPages={data.data.totalPages}
-                  limit={data.data.limit}
-                />
-              </Link>
-            ))}
+            {data &&
+              data.data &&
+              data.data.map((item) => (
+                <>
+               
+                  <Feed
+                    data={item}
+                    id={item._id}
+                    totalPages={data.data.totalPages}
+                    limit={data.data.limit}
+                  />
+                </>
+              ))}
           </div>
         </section>
       </main>
