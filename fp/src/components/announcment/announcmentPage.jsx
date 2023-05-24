@@ -6,15 +6,7 @@ import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
 import styled from "@emotion/styled";
 import ai from "../../assets/pexels-photo-4262424.jpeg";
-
-
-
-
-
-
-
-
-
+import "./style.css";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import "ol/ol.css"; // Import OpenLayers CSS
 import { Map, View } from "ol";
@@ -30,6 +22,15 @@ import PersonIcon from "@mui/icons-material/Person";
 import PaletteIcon from "@mui/icons-material/Palette";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import LocalLaundryServiceIcon from "@mui/icons-material/LocalLaundryService";
+import {
+  Button,
+  Dialog,
+  DialogTitle,
+  DialogContent,
+  DialogActions,
+  TextField,
+} from "@mui/material";
+
 const StyledCard = styled(Card)({
   backgroundColor: "#f0ecec",
   boxShadow: "0px 2px 4px rgba(0, 0, 0, 0.1)",
@@ -138,11 +139,13 @@ const DataCard = () => {
   const ref = useRef(null);
   const [mode, setMode] = useState("default"); // Add a state variable for the mode
 
+  const [comment, setComment] = useState({});
+  const [name, setName] = useState("");
+  const [sent, setSent] = useState(false);
+  const [openDialog, setOpenDialog] = useState(false);
+
   // ...
 
-  const handleModeChange = (newMode) => {
-    setMode(newMode);
-  };
   console.log(id);
   useEffect(() => {
     const fetchData = async () => {
@@ -157,11 +160,19 @@ const DataCard = () => {
     };
 
     fetchData();
-  }, [id]);
+  }, [id, sent]);
 
   // if (!data) {
   //   return <div>Loading...</div>;
   // }
+  const handleOpenDialog = () => {
+    setOpenDialog(true);
+  };
+
+  const handleCloseDialog = () => {
+    setOpenDialog(false);
+  };
+
   const { idDisaster } = data;
 
   const mapRef = useRef({}); // Reference to the map container element
@@ -221,6 +232,39 @@ const DataCard = () => {
     }
 
     return [0, 0];
+  };
+  const handleCommentEnter = (event) => {
+    const { name, value } = event.target;
+    setComment((prevComment) => ({ ...prevComment, [name]: value }));
+  };
+
+  const postComment = () => {
+    const commentUrl = "http://localhost:5000/api/comment";
+    const oldPostUrl = `http://localhost:5000/api/a/${id}`;
+
+    alert(comment);
+    axios
+      .post(commentUrl, comment)
+      .then((response) => {
+        const newCommentId = response.data.data._id;
+        console.log(response);
+        alert(newCommentId);
+        axios
+          .post(oldPostUrl, { reactionId: newCommentId })
+          .then((response) => {
+            console.log(response);
+            alert("Last Done");
+            setSent(!sent); // Toggle the value of sent to trigger the useEffect hook
+            setComment(""); // Clear the comment input field
+            handleCloseDialog();
+          })
+          .catch((error) => {
+            console.error("Error posting comment to /api/a/{id}:", error);
+          });
+      })
+      .catch((error) => {
+        console.error("Error posting comment to /api/comment:", error);
+      });
   };
 
   return (
@@ -325,22 +369,72 @@ const DataCard = () => {
               {/* Add more disaster info fields as needed */}
             </DisasterInfoWrapper>
           )}
-
-          {data.reactionId && data.reactionId.length > 0 && (
-            <ReactionWrapper>
-              <ReactionTitle variant="h6">Reactions:</ReactionTitle>
-              {data.reactionId.map((reaction) => (
-                <ReactionItem key={reaction._id}>
-                  <p style={{ fontWeight: "bold", display: "inline" }}>
-                    {reaction.name ? reaction.name : "Anonymos"}
-                  </p>
-                  : {reaction.comment}
-                </ReactionItem>
-              ))}
-            </ReactionWrapper>
-          )}
         </CardContent>
+        <>
+          <section className="comments-section">
+            {data.reactionId && data.reactionId.length > 0 && (
+              <ReactionWrapper>
+                <ReactionTitle variant="h6">Reactions:</ReactionTitle>
+                <div className="comment-new">
+                  <Button variant="contained" onClick={handleOpenDialog}>
+                    Add Comment
+                  </Button>
+
+                  <Dialog open={openDialog} onClose={handleCloseDialog}>
+                    <DialogTitle>Add Comment</DialogTitle>
+                    <DialogContent>
+                      <h3>Add your Comment</h3>
+                      <h6
+                        style={{
+                          color: "gray",
+                          marginBottom: "revert",
+                          fontSize: "8px",
+                        }}
+                      >
+                        Be positive and leave a beautiful touch !{" "}
+                      </h6>
+
+                      <TextField
+                        label="Name"
+                        name="name"
+                        onChange={handleCommentEnter}
+                      />
+                      <TextField
+                        label="Comment"
+                        onChange={handleCommentEnter}
+                        multiline
+                        name="comment"
+                      />
+                    </DialogContent>
+                    <DialogActions>
+                      <Button onClick={handleCloseDialog}>Cancel</Button>
+                      <Button onClick={postComment} color="primary">
+                        Post Comment
+                      </Button>
+                    </DialogActions>
+                  </Dialog>
+                </div>
+                {data.reactionId.map((reaction) => (
+                  <ReactionItem key={reaction._id}>
+                    <div className="comment response" key={reaction._id}>
+                      <div className="comment-avatar-container">
+                        <img
+                          className="comment-avatar"
+                          src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQs3B68lDbcT4MjXQrdGhS6L3_R9wEXA2FNolmSjVbXdg&s"
+                          alt="avatar"
+                        />
+                      </div>
+                      <p className="comment-text">{reaction.comment}</p>
+                      <p className="comment-time-stamp">{reaction.name}</p>
+                    </div>
+                  </ReactionItem>
+                ))}
+              </ReactionWrapper>
+            )}
+          </section>
+        </>
       </StyledCard>
+
       <div
         ref={mapRef}
         style={{ width: "100%", height: "300px", overflow: "hidden" }}
