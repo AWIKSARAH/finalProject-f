@@ -269,106 +269,118 @@ const DataCard = () => {
 
   return (
     <ThemeProvider theme={theme}>
+      {" "}
       <StyledCard>
-        <div style={{ width: "50%", marginRight: "10%" }}>
-          <img src={ai} alt="Image" style={{ width: "100%" }} />
-          <button style={{ width: "100%" }}>did</button>
-        </div>
-        <CardContent style={{ width: "50%" }}>
-          <Title variant="h5">{data.title}</Title>
-          <Description variant="body1">{data.description}</Description>
-          <Contact variant="body2">Contact: {data.tel}</Contact>
+        <CardContent
+          style={{
+            width: "100%",
+            display: "flex",
+            justifyContent: "space-evenly",
+            flexDirection: "row",
+            alignItems: "center",
+          }}
+        >
+          <div style={{ width: "50%", marginRight: "10%" }}>
+            <Title variant="h5">{data.title}</Title>
+            <img src={ai} alt="Image" style={{ width: "100%" }} />
+            <button style={{ width: "100%" }}>did</button>
+          </div>
+          <div style={{ width: "50%" }}>
+            {" "}
+            <Description variant="body1">{data.description}</Description>
+            <Contact variant="body2">Contact: {data.tel}</Contact>
+            {data.idPerson && (
+              <PersonInfoWrapper>
+                <PersonInfoTitle variant="h6">
+                  Person Information:
+                </PersonInfoTitle>
+                <PersonInfoItem>
+                  <PersonIcon />
+                  <span style={{ marginLeft: "8px" }}>
+                    Name: {data.idPerson.name}
+                  </span>
+                </PersonInfoItem>
 
-          {data.idPerson && (
-            <PersonInfoWrapper>
-              <PersonInfoTitle variant="h6">
-                Person Information:
-              </PersonInfoTitle>
-              <PersonInfoItem>
-                <PersonIcon />
-                <span style={{ marginLeft: "8px" }}>
-                  Name: {data.idPerson.name}
-                </span>
-              </PersonInfoItem>
-
-              <PersonInfoTitle variant="h6">
-                Person Information:
-              </PersonInfoTitle>
-              <PersonInfoItem>
-                <VisibilityIcon />
-                <span style={{ marginLeft: "8px" }}>
-                  Eyes: {data.idPerson.eyes}
-                </span>
-                <ColorCircle
-                  color={
-                    data.idPerson.eyes === "Blue"
-                      ? "#0000FF"
-                      : data.idPerson.eyes === "Brown"
-                      ? "#654321"
-                      : data.idPerson.eyes === "Green"
-                      ? "#008000"
-                      : data.idPerson.eyes === "Hazel"
-                      ? "#B58900"
-                      : ""
-                  }
-                />
-              </PersonInfoItem>
-              <PersonInfoItem>
-                <LocalLaundryServiceIcon />
-                <span style={{ marginLeft: "8px" }}>
-                  Color Hair: {data.idPerson.colorHair}
-                </span>
-                <ColorCircle
-                  color={
-                    data.idPerson.colorHair === "Blonde"
-                      ? "#FFFF00"
-                      : data.idPerson.colorHair === "Brown"
-                      ? "#964B00"
-                      : data.idPerson.colorHair === "Black"
-                      ? "#000000"
-                      : data.idPerson.colorHair === "Red"
-                      ? "#FF0000"
-                      : ""
-                  }
-                />
-              </PersonInfoItem>
-              <PersonInfoItem>
-                <PaletteIcon />
-                <span
-                  style={{
-                    marginLeft: "8px",
-                    color: `${data.idPerson.colorSkin}`,
-                  }}
-                >
-                  Color Skin: {data.idPerson.colorSkin}
-                </span>
-                <ColorCircle
-                  color={
-                    data.idPerson.colorSkin === "Fair"
-                      ? "#F8DEB3"
-                      : data.idPerson.colorSkin === "Medium"
-                      ? "#D2B48C"
-                      : data.idPerson.colorSkin === "Dark"
-                      ? "#8B4513"
-                      : ""
-                  }
-                />
-              </PersonInfoItem>
-            </PersonInfoWrapper>
-          )}
-
-          {data.idDisaster && (
-            <DisasterInfoWrapper>
-              <DisasterInfoTitle variant="h6">
-                Disaster Information:
-              </DisasterInfoTitle>
-              <DisasterInfoItem>Type: {data.idDisaster.type}</DisasterInfoItem>
-              <DisasterInfoItem>
-                Location: {data.idDisaster.location}
-              </DisasterInfoItem>
-              {/* Add more disaster info fields as needed */}
-            </DisasterInfoWrapper>
-          )}
+                <PersonInfoTitle variant="h6">
+                  Person Information:
+                </PersonInfoTitle>
+                <PersonInfoItem>
+                  <VisibilityIcon />
+                  <span style={{ marginLeft: "8px" }}>
+                    Eyes: {data.idPerson.eyes}
+                  </span>
+                  <ColorCircle
+                    color={
+                      data.idPerson.eyes === "Blue"
+                        ? "#0000FF"
+                        : data.idPerson.eyes === "Brown"
+                        ? "#654321"
+                        : data.idPerson.eyes === "Green"
+                        ? "#008000"
+                        : data.idPerson.eyes === "Hazel"
+                        ? "#B58900"
+                        : ""
+                    }
+                  />
+                </PersonInfoItem>
+                <PersonInfoItem>
+                  <LocalLaundryServiceIcon />
+                  <span style={{ marginLeft: "8px" }}>
+                    Color Hair: {data.idPerson.colorHair}
+                  </span>
+                  <ColorCircle
+                    color={
+                      data.idPerson.colorHair === "Blonde"
+                        ? "#FFFF00"
+                        : data.idPerson.colorHair === "Brown"
+                        ? "#964B00"
+                        : data.idPerson.colorHair === "Black"
+                        ? "#000000"
+                        : data.idPerson.colorHair === "Red"
+                        ? "#FF0000"
+                        : ""
+                    }
+                  />
+                </PersonInfoItem>
+                <PersonInfoItem>
+                  <PaletteIcon />
+                  <span
+                    style={{
+                      marginLeft: "8px",
+                      color: `${data.idPerson.colorSkin}`,
+                    }}
+                  >
+                    Color Skin: {data.idPerson.colorSkin}
+                  </span>
+                  <ColorCircle
+                    color={
+                      data.idPerson.colorSkin === "Fair"
+                        ? "#F8DEB3"
+                        : data.idPerson.colorSkin === "Medium"
+                        ? "#D2B48C"
+                        : data.idPerson.colorSkin === "Dark"
+                        ? "#8B4513"
+                        : ""
+                    }
+                  />
+                </PersonInfoItem>
+              </PersonInfoWrapper>
+            )}
+            {data.idDisaster && (
+              <DisasterInfoWrapper>
+                <DisasterInfoTitle variant="h6">
+                  Disaster Information:
+                </DisasterInfoTitle>
+                <DisasterInfoItem>
+                  Type: {data.idDisaster.type}
+                </DisasterInfoItem>
+                <DisasterInfoItem>
+                  Location: {data.idDisaster.location}
+                </DisasterInfoItem>
+                {/* Add more disaster info fields as needed */}
+              </DisasterInfoWrapper>
+            )}
+          </div>
         </CardContent>
         <>
           <section className="comments-section">
@@ -414,27 +426,28 @@ const DataCard = () => {
                     </DialogActions>
                   </Dialog>
                 </div>
-                {data.reactionId.map((reaction) => (
-                  <ReactionItem key={reaction._id}>
-                    <div className="comment response" key={reaction._id}>
-                      <div className="comment-avatar-container">
-                        <img
-                          className="comment-avatar"
-                          src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQs3B68lDbcT4MjXQrdGhS6L3_R9wEXA2FNolmSjVbXdg&s"
-                          alt="avatar"
-                        />
+                <div style={{ height: "300px", overflowY: "scroll" }}>
+                  {data.reactionId.map((reaction) => (
+                    <ReactionItem key={reaction._id}>
+                      <div className="comment response" key={reaction._id}>
+                        <div className="comment-avatar-container">
+                          <img
+                            className="comment-avatar"
+                            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQs3B68lDbcT4MjXQrdGhS6L3_R9wEXA2FNolmSjVbXdg&s"
+                            alt="avatar"
+                          />
+                        </div>
+                        <p className="comment-text">{reaction.comment}</p>
+                        <p className="comment-time-stamp">{reaction.name}</p>
                       </div>
-                      <p className="comment-text">{reaction.comment}</p>
-                      <p className="comment-time-stamp">{reaction.name}</p>
-                    </div>
-                  </ReactionItem>
-                ))}
+                    </ReactionItem>
+                  ))}
+                </div>
               </ReactionWrapper>
             )}
           </section>
         </>
       </StyledCard>
-
       <div
         ref={mapRef}
         style={{ width: "100%", height: "300px", overflow: "hidden" }}
